@@ -644,7 +644,7 @@ class matriz_Ortogonal():
 				nodoColum = nodoFila.Columna.primero
 				while nodoColum != None:
 					if nodoColum.estado > 0:
-						headFila = headFila + "NODO" + str(nodoFila.x) + str(nodoColum.y) + "[label=\"Correo: " + str(nodoColum.mail) + "\"];\n"
+						headFila = headFila + "NODO" + str(nodoFila.x) + str(nodoColum.y) + "[label=\"Usuario: " + str(nodoColum.mail) + "\"];\n"
 						conexionesHoriz = conexionesHoriz + nodoAnterior + " -> " + "NODO" + str(nodoFila.x) + str(nodoColum.y) + "[constraint=false];\n"
 						conexionesHoriz = conexionesHoriz + "NODO" + str(nodoFila.x) + str(nodoColum.y) + " -> " + nodoAnterior + "[constraint=false];\n"
 						nodoAnterior = "NODO" + str(nodoFila.x) + str(nodoColum.y)
@@ -671,45 +671,7 @@ class matriz_Ortogonal():
 			check_call(['dot','-Tpng','C:\Users\Carlos\Desktop\matriz.dot','-o','C:\Users\Carlos\Desktop\matriz.png'])
 			subprocess.call(['C:\Users\Carlos\Desktop\matriz.png'], shell=True)
 
-'''
-matriz = matriz_Ortogonal()
-matriz.insertar("carlospecam@gmail.com")
-matriz.insertar("marceperalta@hotmail.com")
-matriz.insertar("samyaceituno@gmail.com")
-matriz.insertar("meganaceituno@gmail.com")
-matriz.insertar("jorgesalguero@hotmail.com")
-matriz.insertar("carlospecam@outlook.com")
-matriz.toDot()
-'''
-'''
-queue = cola()
-queue.encolar(1)
-queue.encolar(2)
-queue.encolar(3)
-queue.encolar(4)
-queue.encolar(5)
-queue.desencolar()
-queue.toDot()
 
-stack = pila()
-stack.push(1)
-stack.push(2)
-stack.push(3)
-stack.push(4)
-stack.push(5)
-stack.pop()
-stack.toDot()
-
-lista = listaSimple()
-lista.insertarFinal("Hola")
-lista.insertarFinal("Ciao")
-lista.insertarFinal("Jelou")
-lista.insertarFinal("Holis")
-lista.insertarFinal("Merga")
-lista.eliminarNodo("muere")
-print lista.buscarNodo("Jelou")
-lista.toDot()
-'''
 #.------Inicializacion de estructuras----
 matriz = matriz_Ortogonal()
 lista = listaSimple()
@@ -790,3 +752,5 @@ def buscar_dominio_matriz():
 
 if __name__ == "__main__":
   app.run(debug=True, host='0.0.0.0')
+
+ #------Fin aplicacion-----
