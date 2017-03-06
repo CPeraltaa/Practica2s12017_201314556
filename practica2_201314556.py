@@ -173,11 +173,11 @@ class listaSimple():
 			return "No se encontro el dato"
 
 class Nodo_Ortogonal():
-	def __init__(self, x, y, stado, mail):
+	def __init__(self, x, y, estado, mail):
 		self.x = x
 		self.y = y
 		self.mail = mail
-		self.estado = stado
+		self.estado = estado
 		self.arriba = None
 		self.abajo = None
 		self.izquierda = None
@@ -519,7 +519,36 @@ class matriz_Ortogonal():
 			cTemporal.Columna.insertar(insercion)
 			lTemporal.Fila.insertar(insercion)
 		else:
-			print "Correo ya insertado"
+			nodoCol = self.l.primero
+			while nodoCol != None:
+				nodoRow = nodoCol.Fila.primero
+				while nodoRow != None:
+					if nodoRow.x == x and nodoRow.y == y:
+						nodoRow.mail = auxi[0]
+						nodoRow.estado = 1
+						break
+					nodoRow = nodoRow.derecha
+				nodoCol = nodoCol.siguiente
+
+	def eliminar(self, correo):
+		auxi = correo.split("@")
+		y = ord(correo[0])
+		x = 0
+		for letter in auxi[1]:
+			x += ord(letter)
+		if self.existe(x, y):
+			nodoCol = self.l.primero
+			while nodoCol != None:
+				nodoRow = nodoCol.Fila.primero
+				while nodoRow != None:
+					if nodoRow.x == x and nodoRow.y == y:
+						nodoRow.mail = ""
+						nodoRow.estado = -1
+						break
+					nodoRow = nodoRow.derecha
+				nodoCol = nodoCol.siguiente
+		else:
+			print "Correo especificado inexistente"
 
 	def toDot(self):
 		conexionHeadColumID = "NODOM"
