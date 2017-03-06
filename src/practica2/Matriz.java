@@ -55,6 +55,11 @@ public class Matriz extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnBuscarLetra.setText("Buscar Letra");
 
@@ -129,6 +134,15 @@ public class Matriz extends javax.swing.JFrame {
         String r = getString("insertarmatriz", formBody); 
         System.out.println(r + "---");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        String correo = txtEliminar.getText();
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("correo", correo)                
+                .build();
+        String r = getString("eliminarmatriz", formBody); 
+        System.out.println(r + "---");
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     public static String getString(String metodo, RequestBody formBody) {
 
