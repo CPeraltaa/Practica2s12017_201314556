@@ -55,6 +55,11 @@ public class Lista extends javax.swing.JFrame {
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Operaciones con lista simple");
 
@@ -112,7 +117,7 @@ public class Lista extends javax.swing.JFrame {
         RequestBody formBody = new FormEncodingBuilder()
                 .add("palabra", palabra)                
                 .build();
-        String r = getString("insertar", formBody); 
+        String r = getString("insertarLista", formBody); 
         System.out.println(r + "---");
     }//GEN-LAST:event_btnInsertarActionPerformed
 
@@ -121,9 +126,18 @@ public class Lista extends javax.swing.JFrame {
         RequestBody formBody = new FormEncodingBuilder()
                 .add("palabra", palabra)                
                 .build();
-        String r = getString("borrar", formBody); 
+        String r = getString("buscarLista", formBody); 
         System.out.println(r + "---");
     }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String palabra = txtBuscar.getText();
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("palabra", palabra)                
+                .build();
+        String r = getString("borrarLista", formBody); 
+        System.out.println(r + "---");
+    }//GEN-LAST:event_btnBuscarActionPerformed
     
     public static String getString(String metodo, RequestBody formBody) {
 

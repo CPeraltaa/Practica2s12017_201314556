@@ -65,11 +65,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Queue"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEncolarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDesencolar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dequeue"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDesencolarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
