@@ -136,7 +136,7 @@ public class Lista extends javax.swing.JFrame {
                 .add("palabra", palabra)                
                 .build();
         String r = getString("borrarLista", formBody); 
-        System.out.println(r + "---");
+        System.out.println(r + "----");
     }//GEN-LAST:event_btnBuscarActionPerformed
     
     public static String getString(String metodo, RequestBody formBody) {
