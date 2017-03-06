@@ -62,8 +62,18 @@ public class Matriz extends javax.swing.JFrame {
         });
 
         btnBuscarLetra.setText("Buscar Letra");
+        btnBuscarLetra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarLetraActionPerformed(evt);
+            }
+        });
 
         btnBuscarDominio.setText("Buscar Dominio");
+        btnBuscarDominio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarDominioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,6 +153,24 @@ public class Matriz extends javax.swing.JFrame {
         String r = getString("eliminarmatriz", formBody); 
         System.out.println(r + "---");
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLetraActionPerformed
+     String letra = txtBuscarLetra.getText();
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("letra", letra)                
+                .build();
+        String r = getString("buscarletra", formBody); 
+        System.out.println(r + "---");
+    }//GEN-LAST:event_btnBuscarLetraActionPerformed
+
+    private void btnBuscarDominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDominioActionPerformed
+        String dominio = txtBuscarDominio.getText();
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("dominio", dominio)                
+                .build();
+        String r = getString("buscardominio", formBody); 
+        System.out.println(r + "---");
+    }//GEN-LAST:event_btnBuscarDominioActionPerformed
 
     public static String getString(String metodo, RequestBody formBody) {
 

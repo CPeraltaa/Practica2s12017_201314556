@@ -126,7 +126,7 @@ public class Lista extends javax.swing.JFrame {
         RequestBody formBody = new FormEncodingBuilder()
                 .add("palabra", palabra)                
                 .build();
-        String r = getString("buscarLista", formBody); 
+        String r = getString("borrarLista", formBody); 
         System.out.println(r + "---");
     }//GEN-LAST:event_btnBorrarActionPerformed
 
@@ -135,7 +135,7 @@ public class Lista extends javax.swing.JFrame {
         RequestBody formBody = new FormEncodingBuilder()
                 .add("palabra", palabra)                
                 .build();
-        String r = getString("borrarLista", formBody); 
+        String r = getString("buscarLista", formBody); 
         System.out.println(r + "----");
     }//GEN-LAST:event_btnBuscarActionPerformed
     

@@ -2,7 +2,6 @@
 Carlos Peralta 201314556
 '''
 import os
-import time
 import subprocess
 
 from flask import Flask, request, Response
@@ -29,10 +28,13 @@ class cola():
 		self.tamano += 1
 	
 	def desencolar(self):
-		num = self.inicio.numero		
-		self.inicio = self.inicio.siguiente
-		self.tamano -= 1		
-		return num
+		if self.inicio != None:
+			num = self.inicio.numero
+			self.inicio = self.inicio.siguiente
+			self.tamano -= 1
+			return num
+		else:
+			return "-------Cola vacia--------"
 
 	def tamanoCola(self):
 		return self.tamano
@@ -76,9 +78,12 @@ class pila():
 		self.tamano +=1
 
 	def pop(self):
-		aux = self.top.numero
-		self.top = self.top.siguiente
-		return aux
+		if self.top !=None:
+			aux = self.top.numero
+			self.top = self.top.siguiente
+			return aux
+		else:
+			return " -----Pila vacia------"
 
 	def toDot(self):
 		with open("C:\Users\Carlos\Desktop\pila.dot", "w") as f:
@@ -544,11 +549,46 @@ class matriz_Ortogonal():
 					if nodoRow.x == x and nodoRow.y == y:
 						nodoRow.mail = ""
 						nodoRow.estado = -1
-						break
+						return "Correo eliminado"
+					nodoRow = nodoRow.derecha
+				nodoCol = nodoCol.siguiente			
+		else:
+			return "Correo especificado inexistente"
+
+	def buscarLetra(self, letra):
+		listadomails = ""
+		nodoCol = self.l.primero
+		if nodoCol == None:
+			return "Vacio"
+		else:
+			while nodoCol != None:
+				nodoRow = nodoCol.Fila.primero
+				while nodoRow != None:
+					if nodoRow.estado > 0:
+						if nodoRow.mail[0] == letra:
+							listadomails += str(nodoRow.mail) + "\n"
 					nodoRow = nodoRow.derecha
 				nodoCol = nodoCol.siguiente
+		return listadomails
+
+	def buscarDominio(self, dominio):
+		listadomails = ""
+		nodoCol = self.l.primero		
+		x = 0
+		for letter in dominio:
+			x += ord(letter)
+		if nodoCol == None:
+			return "Vacio"
 		else:
-			print "Correo especificado inexistente"
+			while nodoCol != None:
+				nodoRow = nodoCol.Fila.primero
+				while nodoRow != None:
+					if nodoRow.estado > 0:
+						if nodoRow.x == x:
+							listadomails += str(nodoRow.mail) + "\n"
+					nodoRow = nodoRow.derecha				
+				nodoCol = nodoCol.siguiente
+		return listadomails
 
 	def toDot(self):
 		conexionHeadColumID = "NODOM"
@@ -567,8 +607,9 @@ class matriz_Ortogonal():
 			conexionesVerticalesDI = "NODOC" + str(nodoTemp1.y)
 			nodoTemp2 = nodoTemp1.Fila.primero
 			while nodoTemp2 != None:
-				conexionesVerticalesID = conexionesVerticalesID + " -> NODO" + str(nodoTemp2.x) + str(nodoTemp1.y)
-				conexionesVerticalesDI = "NODO" + str(nodoTemp2.x) + str(nodoTemp1.y) + " -> " + conexionesVerticalesDI
+				if nodoTemp2.estado > 0:
+					conexionesVerticalesID = conexionesVerticalesID + " -> NODO" + str(nodoTemp2.x) + str(nodoTemp1.y)
+					conexionesVerticalesDI = "NODO" + str(nodoTemp2.x) + str(nodoTemp1.y) + " -> " + conexionesVerticalesDI
 				nodoTemp2 = nodoTemp2.derecha
 			conexionesVerticalesID = conexionesVerticalesID + ";\n"
 			conexionesVerticalesDI = conexionesVerticalesDI + ";\n"
@@ -629,9 +670,6 @@ class matriz_Ortogonal():
 			from subprocess import check_call
 			check_call(['dot','-Tpng','C:\Users\Carlos\Desktop\matriz.dot','-o','C:\Users\Carlos\Desktop\matriz.png'])
 			subprocess.call(['C:\Users\Carlos\Desktop\matriz.png'], shell=True)
-
-
-
 
 '''
 matriz = matriz_Ortogonal()
@@ -727,8 +765,28 @@ def dequeue__cola():
 @app.route('/insertarmatriz', methods=['POST'])
 def insertar_matriz():
 	parametro = str(request.form['correo'])
-	matriz.insertar(parametro)	
+	matriz.insertar(parametro)
+	matriz.toDot()
 	return "Se ha insertado " + parametro
+
+@app.route('/eliminarmatriz', methods=['POST'])
+def eliminar_matriz():
+	parametro = str(request.form['correo'])
+	respuesta = matriz.eliminar(parametro)
+	matriz.toDot()	
+	return respuesta + parametro
+
+@app.route('/buscarletra', methods=['POST'])
+def buscar_letra_matriz():
+	parametro = str(request.form['letra'])
+	respuesta = matriz.buscarLetra(parametro)	
+	return respuesta
+
+@app.route('/buscardominio', methods=['POST'])
+def buscar_dominio_matriz():
+	parametro = str(request.form['dominio'])
+	respuesta = matriz.buscarDominio(parametro)	
+	return respuesta
 
 if __name__ == "__main__":
   app.run(debug=True, host='0.0.0.0')

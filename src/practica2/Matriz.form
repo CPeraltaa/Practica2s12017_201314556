@@ -121,6 +121,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar Letra"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarLetraActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtBuscarDominio">
     </Component>
@@ -128,6 +131,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscar Dominio"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarDominioActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
